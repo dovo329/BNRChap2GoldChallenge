@@ -17,20 +17,19 @@ int main(int argc, const char * argv[]) {
               valueInDollars:45
          serialNumber:@"R2D2C3P0"];*/
         
-        //NSMutableArray *testArr = [[NSMutableArray alloc] init];
-        BNRItem *testItem = [BNRItem randomItem];
+        NSMutableArray *testItemArray = [[NSMutableArray alloc] init];
+        for (int i=0; i<5; i++) {
+            [testItemArray addObject:[BNRItem randomItem]];
+        }
+
+        BNRContainer *testContainer =
+            [[BNRContainer alloc]
+             initWithContainerName:@"Doug's big bucket o' items"
+             valueInDollars:32
+             serialNumber:@"C3POR2D2"
+             itemArray:testItemArray];
         
-        /*NSLog(@"before testArr.count=%d", (int)[testArr count]);
-        [testArr addObject:testItem];
-        NSLog(@"after testArr.count=%d", (int)[testArr count]);*/
-        
-        //NSLog(@"%@", testItem);
-        
-        BNRContainer *testContainer = [[BNRContainer alloc] init];
-        [testContainer addItem:[BNRItem randomItem]];
-        [testContainer addItem:[BNRItem randomItem]];
-        
-        NSLog(@"testContainer has \n%@", testContainer);
+        NSLog(@"testContainer contains the following: \n%@", testContainer);
     }
     return 0;
 }
