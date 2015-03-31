@@ -29,7 +29,19 @@ int main(int argc, const char * argv[]) {
              serialNumber:@"C3POR2D2"
              itemArray:testItemArray];
         
+        NSMutableArray *mondoContainerItems = [[NSMutableArray alloc] init];
+        [mondoContainerItems addObject:testContainer];
+        
+        BNRContainer *mondoContainer =
+            [[BNRContainer alloc]
+             initWithContainerName:@"Container of a container"
+             valueInDollars:1
+             serialNumber:@"1"
+             itemArray:mondoContainerItems];
+        
         NSLog(@"testContainer contains the following: \n%@", testContainer);
+        NSLog(@"\n\n");
+        NSLog(@"mondoContainer contains the following: \n%@", mondoContainer);
     }
     return 0;
 }
