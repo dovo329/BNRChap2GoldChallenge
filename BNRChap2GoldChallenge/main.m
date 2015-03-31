@@ -29,17 +29,35 @@ int main(int argc, const char * argv[]) {
              serialNumber:@"C3POR2D2"
              itemArray:testItemArray];
         
+        
+        NSMutableArray *testItemArray2 = [[NSMutableArray alloc] init];
+        for (int i=0; i<4; i++) {
+            [testItemArray2 addObject:[BNRItem randomItem]];
+        }
+
+        BNRContainer *testContainer2 =
+            [[BNRContainer alloc]
+             initWithContainerName:@"Doug's backpack of mystery"
+             valueInDollars:32
+             serialNumber:@"90210"
+             itemArray:testItemArray2];
+        
+        
+        
         NSMutableArray *mondoContainerItems = [[NSMutableArray alloc] init];
         [mondoContainerItems addObject:testContainer];
+        [mondoContainerItems addObject:testContainer2];
         
         BNRContainer *mondoContainer =
             [[BNRContainer alloc]
-             initWithContainerName:@"Container of a container"
+             initWithContainerName:@"Container multiple containers"
              valueInDollars:1
              serialNumber:@"1"
              itemArray:mondoContainerItems];
         
         NSLog(@"testContainer contains the following: \n%@", testContainer);
+        NSLog(@"\n\n");
+        NSLog(@"testContainer2 contains the following: \n%@", testContainer2);
         NSLog(@"\n\n");
         NSLog(@"mondoContainer contains the following: \n%@", mondoContainer);
     }
