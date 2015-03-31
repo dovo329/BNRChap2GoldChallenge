@@ -32,12 +32,13 @@
 
 - (instancetype)init;
 
-
 - (void)setSubitems:(NSMutableArray *)subitemsInit;
 - (NSMutableArray *)subitems;
 
 - (void)addItem:(BNRItem *)item;
 
 - (NSString *)description;
+
+- (NSInteger)totalWorth;
 
 @end

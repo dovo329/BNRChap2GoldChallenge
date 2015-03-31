@@ -86,20 +86,17 @@
 
 - (void)addItem:(BNRItem *)item
 {
-    //NSLog(@"adding %@ to self.subitems", item);
-    //NSLog(@"before [self.subitems count]=%d", (int)[self.subitems count]);
     [self.subitems addObject:item];
-    //NSLog(@"after [self.subitems count]=%d", (int)[self.subitems count]);
 }
 
 - (NSString *)description
 {
     NSMutableString *subItemsStr = [[NSMutableString alloc] init];
-    NSInteger totalWorth = self.valueInDollars;
+    NSInteger totalWorth = [self totalWorth];
+    
     
     for (int i=0; i<[self.subitems count]; i++)
     {
-        totalWorth += (int)((BNRItem *)self.subitems[i]).valueInDollars;
         [subItemsStr appendFormat:@"%@\n", self.subitems[i]];
     }
     
@@ -108,6 +105,24 @@
     
     [returnStr appendString:subItemsStr];
     return returnStr;
+}
+
+- (NSInteger)totalWorth
+{
+    NSInteger totalWorth = self.valueInDollars;
+    
+    //NSLog(@"subitems count is %d", (int)[self.subitems count]);
+    for (int i=0; i<[self.subitems count]; i++)
+    {
+        if ([self.subitems[i] isKindOfClass:[BNRContainer class]]) {
+            //NSLog(@"Hit the container of a container case");
+            totalWorth += [self.subitems[i] totalWorth];
+        } else if ([self.subitems[i] isKindOfClass:[BNRItem class]]) {
+            //NSLog(@"Hit the normal case");
+            totalWorth += (int)((BNRItem *)self.subitems[i]).valueInDollars;
+        }
+    }
+    return totalWorth;
 }
 
 @end
